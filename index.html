@@ -15,7 +15,7 @@
     async function checkContract() {
       let address = document.getElementById("contract").value;
       
-      let response = await fetch(`https://api.bscscan.com/api?module=contract&action=getsourcecode&address=${address}&apikey=74R7U3DCNSDBBIVGDUDPSUUQ4DJV7STPPR);
+let response = await fetch(`/api/check?address=${address}`);
       
       let data = await response.json();
       let source = data.result[0].SourceCode;
