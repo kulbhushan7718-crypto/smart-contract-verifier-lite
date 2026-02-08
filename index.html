@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Contract Verifier</title>
+</head>
+<body>
+  <h1>Smart Contract Verifier</h1>
+
+  <input type="text" id="contract" placeholder="Paste contract address">
+  <button onclick="checkContract()">Check</button>
+
+  <p id="result"></p>
+
+  <script>
+    async function checkContract() {
+      let address = document.getElementById("contract").value;
+      
+      let response = await fetch(`https://api.bscscan.com/api?module=contract&action=getsourcecode&address=${address}&apikey=74R7U3DCNSDBBIVGDUDPSUUQ4DJV7STPPR`);
+      
+      let data = await response.json();
+      let source = data.result[0].SourceCode;
+
+      let risk = 0;
+
+      if (source.includes("mint(")) risk += 30;
+      if (source.includes("blacklist")) risk += 30;
+      if (source.includes("owner")) risk += 20;
+
+      if (risk < 30) {
+        document.getElementById("result").innerText = "Low Risk";
+      } else if (risk < 60) {
+        document.getElementById("result").innerText = "Medium Risk";
+      } else {
+        document.getElementById("result").innerText = "High Risk";
+      }
+    }
+  </script>
+</body>
+</html>
