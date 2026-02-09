@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   const { address } = req.query;
 
   const response = await fetch(
-    `https://api.bscscan.com/api?module=contract&action=getsourcecode&address=${address}&apikey=74R7U3DCNSDBBIVGDUDPSUUQ4DJV7STPPR`
+    `https://api.bscscan.com/api?module=contract&action=getsourcecode&address=${address}&apikey=P9ENI2P3363E537WCRFRCF896D415YWDXV`
   );
 
   const data = await response.json();
